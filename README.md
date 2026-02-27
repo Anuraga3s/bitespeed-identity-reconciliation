@@ -1,6 +1,6 @@
 # BiteSpeed Identity Reconciliation Backend
 
-## 📌 Overview
+##  Overview
 
 This project implements an Identity Reconciliation service as part of the BiteSpeed backend task.
 
@@ -13,7 +13,7 @@ It ensures:
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - Node.js
 - TypeScript
