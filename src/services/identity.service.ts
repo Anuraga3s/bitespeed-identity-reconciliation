@@ -1,11 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 export const identifyContact = async (
   email?: string,
   phoneNumber?: string
 ) => {
-
-  
   const matches = await prisma.contact.findMany({
     where: {
       OR: [
