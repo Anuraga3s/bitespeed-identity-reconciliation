@@ -5,7 +5,7 @@ export const identifyContact = async (
   phoneNumber?: string
 ) => {
 
-  // 1️⃣ Find direct matches
+  
   const matches = await prisma.contact.findMany({
     where: {
       OR: [
@@ -15,7 +15,7 @@ export const identifyContact = async (
     }
   });
 
-  // 2️⃣ If no matches → create primary
+  
   if (matches.length === 0) {
     const newContact = await prisma.contact.create({
       data: {
@@ -28,14 +28,14 @@ export const identifyContact = async (
     return buildResponse([newContact]);
   }
 
-  // 3️⃣ Collect primary IDs
+ 
   const primaryIds = matches.map(c =>
     c.linkPrecedence === "primary" ? c.id : c.linkedId!
   );
 
   const uniquePrimaryIds = [...new Set(primaryIds)];
 
-  // 4️⃣ Fetch entire cluster
+  
   const allContacts = await prisma.contact.findMany({
     where: {
       OR: [
@@ -45,14 +45,14 @@ export const identifyContact = async (
     }
   });
 
-  // 5️⃣ Determine oldest primary
+  
   const sorted = allContacts.sort(
     (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
   );
 
   const truePrimary = sorted[0];
 
-  // 6️⃣ Convert other primaries if needed
+ 
   await Promise.all(
     allContacts
       .filter(c => c.id !== truePrimary.id && c.linkPrecedence === "primary")
@@ -67,7 +67,7 @@ export const identifyContact = async (
       )
   );
 
-  // 7️⃣ Check if new secondary needed
+ 
   const exists = allContacts.some(
     c => c.email === email && c.phoneNumber === phoneNumber
   );
@@ -83,7 +83,7 @@ export const identifyContact = async (
     });
   }
 
-  // 8️⃣ Re-fetch updated cluster
+  
   const finalContacts = await prisma.contact.findMany({
     where: {
       OR: [
