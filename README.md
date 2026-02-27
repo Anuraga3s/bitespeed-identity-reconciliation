@@ -23,6 +23,6 @@ It ensures:
 
 ---
 
-## 🚀 Hosted Endpoint
+##  Hosted Endpoint
 
 POST  
