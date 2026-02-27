@@ -24,5 +24,27 @@ It ensures:
 ---
 
 ##  Hosted Endpoint
-
 POST  
+https://bitespeed-identity-4eeo.onrender.com/identify
+
+---
+
+## Sample Request(JSON)
+
+1.
+{
+    "email": "test@example.com",
+    "phoneNumber": "123456"
+}
+
+2.
+{
+    "email": "test2@example.com",
+    "phoneNumber": "123456"
+}
+
+3.
+{
+    "email": "test@example.com",
+    "phoneNumber": "12345678"
+}
